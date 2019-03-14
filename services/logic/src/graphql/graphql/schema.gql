@@ -1,0 +1,33 @@
+scalar Date
+
+scalar JSON
+
+type GraphQLResult {
+  data: JSON!
+  errors: JSON!
+  extensions: JSON!
+  status: Int!
+}
+
+type Query {
+  query(endpoint: String!, query: String!): GraphQLResult!
+}
+
+type Mutation {
+  mutate(endpoint: String!, query: String!): GraphQLResult!
+}
+
+type QueryEvent {
+  endpoint: String!
+  query: String!
+}
+
+type MutateEvent {
+  endpoint: String!
+  mutation: String!
+}
+
+type Subscription {
+  onQuery: QueryEvent!
+  onMutate: MutateEvent!
+}

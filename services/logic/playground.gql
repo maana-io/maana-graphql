@@ -1,37 +1,24 @@
-query info {
-  info {
-    id
-    name
-    description
+# Write your query or mutation here
+query allPeople {
+  query(
+    endpoint: "http://localhost:8051/graphql"
+    query: "query allPeople { allPeople { id name givenName familyName dateOfBirth }}"
+  ) {
+    data
+    errors
+    extensions
+    status
   }
 }
 
 mutation addPerson {
-  addPerson(
-    input: {
-      name: "bob smith"
-      givenName: "bob"
-      familyName: "smith"
-      dateOfBirth: "1980-12-01"
-    }
-  )
-}
-
-query person {
-  person(id: "137e858b-995a-4760-841a-85c966393764") {
-    name
-    givenName
-    familyName
-    dateOfBirth
-  }
-}
-
-query allPeople {
-  allPeople {
-    id
-    name
-    givenName
-    familyName
-    dateOfBirth
+  mutate(
+    endpoint: "http://localhost:8051/graphql"
+    mutation: "mutation addPerson { addPerson(input: { id: \"p1\" name: \"bob smith\" givenName: \"bob\" familyName: \"smith\" dateOfBirth: \"01/01/2001\" })}"
+  ) {
+    data
+    errors
+    extensions
+    status
   }
 }

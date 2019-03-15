@@ -15,7 +15,7 @@
     "prettier": "./node_modules/.bin/prettier --write \"src/**/*.{js,jsx}\"",
     "start": "node ./dist/start.js",
     "startdev": "node ./dist/start.dev.js",
-    "prepublish": "npm-run-all build docker-build",
+    "prepare": "npm-run-all build docker-build",
     "dbg": "nodemon --inspect ./src/start.dev.js --exec babel-node -e js",
     "dev": "nodemon ./src/start.dev.js --exec babel-node -e js",
     "disableAuth": "nodemon ./src/start.dev.js --exec babel-node -e js",

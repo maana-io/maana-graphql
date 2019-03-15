@@ -3,9 +3,9 @@ scalar Date
 scalar JSON
 
 type GraphQLResult {
-  data: JSON!
-  errors: JSON!
-  extensions: JSON!
+  data: JSON
+  errors: JSON
+  extensions: JSON
   status: Int!
 }
 
@@ -14,7 +14,7 @@ type Query {
 }
 
 type Mutation {
-  mutate(endpoint: String!, query: String!): GraphQLResult!
+  mutate(endpoint: String!, mutation: String!): GraphQLResult!
 }
 
 type QueryEvent {

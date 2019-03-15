@@ -1,1 +1,1 @@
-# q-svc-maana-net
+# q-svc-maana-graphql

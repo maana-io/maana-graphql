@@ -21,8 +21,8 @@ const SELF = `${process.env.SERVICE_ID}-graphql`
 //     }
 //   }
 
-const request = async (endpoint, query) => {
-  const results = await rawRequest(endpoint, query)
+const request = async (endpoint, query, variables) => {
+  const results = await rawRequest(endpoint, query, variables)
   const { data, errors, extensions, headers, status } = results
   console.log(
     JSON.stringify({ data, errors, extensions, headers, status }, undefined, 2)
@@ -32,16 +32,18 @@ const request = async (endpoint, query) => {
 
 export const resolver = {
   Query: {
-    query: async (_, { endpoint, query }) => {
-      const result = await request(endpoint, query)
-      // pubsub.publish('onQuery', { onQuery: { endpoint, query } })
+    query: async (_, { endpoint, query, variables }) => {
+      const result = await request(endpoint, query, variables)
+      pubsub.publish('onQuery', { onQuery: { endpoint, query, variables } })
       return result
     }
   },
   Mutation: {
-    mutate: async (_, { endpoint, mutation }) => {
-      const result = await request(endpoint, mutation)
-      // pubsub.publish('onMutate', { onMutate: { endpoint, mutation } })
+    mutate: async (_, { endpoint, mutation, variables }) => {
+      const result = await request(endpoint, mutation, variables)
+      pubsub.publish('onMutate', {
+        onMutate: { endpoint, mutation, variables }
+      })
       return result
     }
   },

@@ -1,4 +1,3 @@
-# Write your query or mutation here
 query allPeople {
   query(
     endpoint: "http://localhost:8051/graphql"
@@ -14,7 +13,21 @@ query allPeople {
 mutation addPerson {
   mutate(
     endpoint: "http://localhost:8051/graphql"
-    mutation: "mutation addPerson { addPerson(input: { id: \"p1\" name: \"bob smith\" givenName: \"bob\" familyName: \"smith\" dateOfBirth: \"01/01/2001\" })}"
+    mutation: "mutation addPerson($id: ID, $name: String!, $givenName: String!, $familyName: String!, $dateOfBirth: Date!) { addPerson(input: { id: $id name: $name givenName: $givenName familyName: $familyName dateOfBirth: $dateOfBirth })}"
+    variables: "{\"id\":\"p1\",\"name\":\"bob smith\",\"givenName\":\"bob\",\"familyName\":\"smith\",\"dateOfBirth\":\"01/01/2001\"}"
+  ) {
+    data
+    errors
+    extensions
+    status
+  }
+}
+
+query bobSmith {
+  query(
+    endpoint: "http://localhost:8051/graphql"
+    query: "query person($id: ID!) { person(id: $id){ id name givenName familyName dateOfBirth } }"
+    variables: "{\"id\":\"p1\"}"
   ) {
     data
     errors

@@ -10,21 +10,23 @@ type GraphQLResult {
 }
 
 type Query {
-  query(endpoint: String!, query: String!): GraphQLResult!
+  query(endpoint: String!, query: String!, variables: JSON): GraphQLResult!
 }
 
 type Mutation {
-  mutate(endpoint: String!, mutation: String!): GraphQLResult!
+  mutate(endpoint: String!, mutation: String!, variables: JSON): GraphQLResult!
 }
 
 type QueryEvent {
   endpoint: String!
   query: String!
+  variables: JSON
 }
 
 type MutateEvent {
   endpoint: String!
   mutation: String!
+  variables: JSON
 }
 
 type Subscription {

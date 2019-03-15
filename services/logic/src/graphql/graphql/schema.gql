@@ -9,8 +9,20 @@ type GraphQLResult {
   status: Int!
 }
 
+input GraphQLResultAsInput {
+  data: JSON
+  errors: JSON
+  extensions: JSON
+  status: Int!
+}
+
 type Query {
   query(endpoint: String!, query: String!, variables: JSON): GraphQLResult!
+
+  selectGraphQLResultData(result: GraphQLResultAsInput): JSON
+  selectGraphQLResultErrors(result: GraphQLResultAsInput): JSON
+  selectGraphQLResultExtensions(result: GraphQLResultAsInput): JSON
+  selectGraphQLResultStatus(result: GraphQLResultAsInput): Int!
 }
 
 type Mutation {

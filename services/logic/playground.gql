@@ -35,3 +35,13 @@ query bobSmith {
     status
   }
 }
+
+query select {
+  selectGraphQLResultData(
+    result: {
+      data: "{\"person\":{\"id\":\"p1\",\"name\":\"bob smith\",\"givenName\":\"bob\",\"familyName\":\"smith\",\"dateOfBirth\":\"01/01/2001\"}}"
+      status: 200
+    }
+  )
+  selectGraphQLResultStatus(result: { status: 500 })
+}

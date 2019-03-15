@@ -36,7 +36,11 @@ export const resolver = {
       const result = await request(endpoint, query, variables)
       pubsub.publish('onQuery', { onQuery: { endpoint, query, variables } })
       return result
-    }
+    },
+    selectGraphQLResultData: async (_, { result }) => result.data,
+    selectGraphQLResultErrors: async (_, { result }) => result.errors,
+    selectGraphQLResultExtensions: async (_, { result }) => result.extensions,
+    selectGraphQLResultStatus: async (_, { result }) => result.status
   },
   Mutation: {
     mutate: async (_, { endpoint, mutation, variables }) => {
